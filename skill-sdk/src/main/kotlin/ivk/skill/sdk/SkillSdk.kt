@@ -1,12 +1,12 @@
-package dev.ivk.skill.sdk
+package ivk.skill.sdk
 
-import dev.ivk.skill.api.apis.SkillApi
-import dev.ivk.skill.api.infrastructure.ClientException
-import dev.ivk.skill.api.infrastructure.ServerException
-import dev.ivk.skill.api.models.MatchResultRequest
-import dev.ivk.skill.api.models.MatchResultResponse
-import dev.ivk.skill.api.models.PreMatchRequest
-import dev.ivk.skill.api.models.PreMatchResponse
+import ivk.skill.api.apis.SkillApi
+import ivk.skill.api.infrastructure.ClientException
+import ivk.skill.api.infrastructure.ServerException
+import ivk.skill.api.models.MatchResultRequest
+import ivk.skill.api.models.MatchResultResponse
+import ivk.skill.api.models.PreMatchRequest
+import ivk.skill.api.models.PreMatchResponse
 import java.io.IOException
 import java.util.concurrent.CompletableFuture
 import java.util.concurrent.TimeUnit
@@ -103,7 +103,7 @@ private constructor(
             matchResultRequest: MatchResultRequest
     ): MatchResultResponse {
         return executeWithRetry {
-            skillApi.postMatchResultWithEnv(
+            skillApi.postMatchResult(
                     modelId = modelId,
                     environment = environment,
                     matchResultRequest = matchResultRequest

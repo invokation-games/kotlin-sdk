@@ -10,5 +10,5 @@ dependencies {
 
 // Configure the main class for the application
 application {
-    mainClassName = 'ivk.skill.example.AppKt'
+    mainClassName = 'ivk.example.AppKt'
 }
