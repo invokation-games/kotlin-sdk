@@ -16,8 +16,8 @@ buildscript {
 
 
 def javaProjects = [
-        project(":ivk-skill-api"),
-        project(":sample-app"),
+        project(":skill-sdk"),
+        project(":example"),
 ]
 
 configure(javaProjects) {

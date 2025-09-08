@@ -1,4 +1,4 @@
-group 'dev.ivk'
+group 'ivk'
 version '${VERSION}'
 
 buildscript {

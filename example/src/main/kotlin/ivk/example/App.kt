@@ -7,13 +7,6 @@ import ivk.skill.api.models.*
 import ivk.skill.sdk.SkillSdk
 import kotlinx.coroutines.runBlocking
 
-class App {
-    val greeting: String
-        get() {
-            return "Hello World!"
-        }
-}
-
 fun main() {
     println("Running IVK Skill sample Kotlin App")
 

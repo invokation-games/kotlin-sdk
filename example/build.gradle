@@ -1,6 +1,6 @@
 dependencies {
     // Depend on the SDK project
-    implementation project(':ivk-skill-sdk')
+    implementation project(':skill-sdk')
 
      // Kotlin stdlib
     implementation 'org.jetbrains.kotlin:kotlin-stdlib'
