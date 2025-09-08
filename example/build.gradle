@@ -1,0 +1,14 @@
+dependencies {
+    // Depend on the SDK project
+    implementation project(':ivk-skill-sdk')
+
+     // Kotlin stdlib
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib'
+
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0"
+}
+
+// Configure the main class for the application
+application {
+    mainClassName = 'ivk.skill.example.AppKt'
+}

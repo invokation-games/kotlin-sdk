@@ -1,0 +1,12 @@
+generatorName: kotlin
+additionalProperties:
+  groupId: ivk
+  artifactId: ivk-skill-sdk
+  artifactVersion: ${VERSION}
+  packageName: ivk.skill.api
+  library: jvm-okhttp4 # or retrofit2
+  supportingFiles: true
+  generateApiDocumentation: true
+  omitGradleWrapper: true
+  omitGradlePluginVersions: true
+  useCoroutines: true
