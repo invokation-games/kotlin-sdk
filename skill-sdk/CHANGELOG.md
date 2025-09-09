@@ -1,0 +1,14 @@
+# Changelog
+
+## 1.0.0 (2025-09-09)
+
+
+### Features
+
+* add release-please, some renames and improved example ([73775fb](https://github.com/invokation-games/kotlin-sdk/commit/73775fbd5fc1747dcf21cebe09fdfcb6b4821c37))
+
+
+### Bug Fixes
+
+* correct package naming after repo move ([e6df35e](https://github.com/invokation-games/kotlin-sdk/commit/e6df35ecb4f32dc3b3b79ceb95ef044f07a647c1))
+* use correct package references ([8f7a351](https://github.com/invokation-games/kotlin-sdk/commit/8f7a351ea4a9e64094b51920f80f8ef4fc299c35))
