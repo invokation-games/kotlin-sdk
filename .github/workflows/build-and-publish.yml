@@ -1,0 +1,39 @@
+name: Build and Publish
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+          cache: gradle
+
+      - name: Build with Gradle
+        working-directory: skill-sdk
+        run: ./gradlew build
+
+      - name: Upload binaries to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: skill-sdk/build/libs/ivk-skill-sdk-*
+          tag: ${{ github.ref }}
+          overwrite: true
+          file_glob: true
+
+#      - name: Publish package to GitHub Packages
+#        working-directory: skill-sdk
+#        run: ./gradlew publish
+#        env:
+#          USERNAME: ${{ github.actor }}
+#          TOKEN: ${{ secrets.GITHUB_TOKEN }}
