@@ -9,8 +9,8 @@ The resulting source is wrapped with a custom `SkillSdk` class to provide improv
 - Fully typed methods
 - Generated from the most recent OpenAPI spec
 - Built-in configurable retry mechanism (optional)
-- Built-in Configurable local fallback (optional)
-- Support for coroutines
+- Built-in Configurable local fallback (COMING SOON)
+- Support for coroutines / CompletableFuture / blocking api
 
 ## How to use
 You can find a prebuilt JAR under our Github Releases.
@@ -18,7 +18,7 @@ Download it and import it in your project.
 
 Alternatively, you can build from source and import your locally build JAR.
 
-The `example` folder contains a simple example project which demonstrates how the SkillSdk class can be initialized and used.
+> The `example` folder contains a simple example project which demonstrates how the SkillSdk class can be initialized and used.
 
 ## How to build from source
 ```
