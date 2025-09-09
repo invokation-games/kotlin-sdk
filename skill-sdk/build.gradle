@@ -1,6 +1,6 @@
 group = 'ivk'
 archivesBaseName = "ivk-skill-sdk"
-version =  file("$projectDir/VERSION").text.trim()
+version =  file("$projectDir/version.txt").text.trim()
 
 buildscript {
     ext.kotlin_version = '1.9.23'

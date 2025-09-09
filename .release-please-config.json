@@ -3,13 +3,7 @@
     "skill-sdk": {
       "path": "skill-sdk",
       "release-type": "simple",
-      "changelog-path": "CHANGELOG.md",
-      "extra-files": [
-        {
-          "type": "generic",
-          "path": "VERSION"
-        }
-      ]
+      "changelog-path": "CHANGELOG.md"
     }
   }
 }
