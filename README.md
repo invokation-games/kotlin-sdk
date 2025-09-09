@@ -5,12 +5,12 @@ The bulk of it is generated using the `openapi-generator`.
 The resulting source is wrapped with a custom `SkillSdk` class to provide improved DX and extra functionality.
 
 ## Features
-- Types & Models
+- Includes types & models
 - Fully typed methods
 - Generated from the most recent OpenAPI spec
-- Built-in configurable retry mechanism (optional)
-- Built-in Configurable local fallback (COMING SOON)
-- Support for coroutines / CompletableFuture / blocking api
+- Configurable retry mechanism (optional)
+- Configurable local fallback (COMING SOON)
+- Support for coroutines / CompletableFuture / blocking
 
 ## How to use
 You can find a prebuilt JAR under our Github Releases.
@@ -18,7 +18,7 @@ Download it and import it in your project.
 
 Alternatively, you can build from source and import your locally build JAR.
 
-> The `example` folder contains a simple example project which demonstrates how the SkillSdk class can be initialized and used.
+> The `example` folder contains a simple project which demonstrates how the SkillSdk class can be initialized and used.
 
 ## How to build from source
 ```
