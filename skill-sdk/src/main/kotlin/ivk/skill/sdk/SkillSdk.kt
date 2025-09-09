@@ -248,8 +248,7 @@ private constructor(
     /** Calculate exponential backoff delay */
     private fun calculateBackoffDelay(attempt: Int): Long {
         val exponentialDelay = retryConfig.initialDelayMs * (2.0.pow(attempt.toDouble())).toLong()
-        val jitteredDelay = exponentialDelay + (0..retryConfig.jitterMs).random()
-        return min(jitteredDelay, retryConfig.maxDelayMs)
+        return min(exponentialDelay, retryConfig.maxDelayMs)
     }
 
     /**
@@ -267,15 +266,13 @@ private constructor(
     @JvmOverloads
     constructor(
             val maxRetries: Int = 3,
-            val initialDelayMs: Long = 1000,
-            val maxDelayMs: Long = 30000,
-            val jitterMs: Int = 500
+            val initialDelayMs: Long = 500,
+            val maxDelayMs: Long = 10000,
     ) {
         init {
             require(maxRetries > 0) { "maxRetries must be positive" }
             require(initialDelayMs > 0) { "initialDelayMs must be positive" }
             require(maxDelayMs >= initialDelayMs) { "maxDelayMs must be >= initialDelayMs" }
-            require(jitterMs >= 0) { "jitterMs must be non-negative" }
         }
     }
 
