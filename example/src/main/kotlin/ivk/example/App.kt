@@ -22,7 +22,7 @@ fun main() {
     // Build the client, this is where you can pass in the API key
     // As well as retry / fallback configuration
     // The SDK performs connection pooling, so it needs to be cleaned up afterwards using .close()
-    val sdk = SkillSdk.builder().apiKey(apiKey).build()
+    val sdk = SkillSdk.builder().environment("test").apiKey(apiKey).build()
 
     val matchResultRequest =
         MatchResultRequest(
@@ -63,9 +63,17 @@ fun main() {
         } catch (e: Exception) {
             println("Error posting match result: ${e.message}")
             e.printStackTrace()
-        } finally {
-            // The SDK performs connection pooling, calling .close() will clean it up
-            sdk.close()
         }
     }
+
+    // Using the blocking api
+    val result = sdk.postMatchResultBlocking(modelId, matchResultRequest)
+    println(result)
+
+    // Using the CompletableFutures api
+    val future = sdk.postMatchResultAsync(modelId, matchResultRequest)
+
+    future.thenAccept { response -> println(response) }
+
+    sdk.close()
 }
