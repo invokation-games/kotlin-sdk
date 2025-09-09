@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/invokation-games/kotlin-sdk/compare/v1.0.0...v1.0.1) (2025-09-09)
+
+
+### Bug Fixes
+
+* remove jitter from RetryConfig ([e549c39](https://github.com/invokation-games/kotlin-sdk/commit/e549c393961ca7030e2b9fdc35511d3ea0924a96))
+
 ## 1.0.0 (2025-09-09)
 
 
