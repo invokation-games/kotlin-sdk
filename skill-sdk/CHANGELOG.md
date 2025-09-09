@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.2](https://github.com/invokation-games/kotlin-sdk/compare/v1.0.1...v1.0.2) (2025-09-09)
+
+
+### Bug Fixes
+
+* fake source change to test workflow ([2daef49](https://github.com/invokation-games/kotlin-sdk/commit/2daef499aa6ff7139494112ef0e8f92d82e155b5))
+
 ## [1.0.1](https://github.com/invokation-games/kotlin-sdk/compare/v1.0.0...v1.0.1) (2025-09-09)
 
 
