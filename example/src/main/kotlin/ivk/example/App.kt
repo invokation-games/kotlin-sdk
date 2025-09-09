@@ -8,44 +8,54 @@ import ivk.skill.sdk.SkillSdk
 import kotlinx.coroutines.runBlocking
 
 fun main() {
-    println("Running IVK Skill sample Kotlin App")
+    println("Running IVK Skill example Kotlin App")
 
+    // You should pass this in as a secret, using env variables or whatever system you use to manage secrets.
     val apiKey = ""
+
+    // The modelId is the ID we provide for your IVK Skill model
+    // You might have received multiple depending on the chosen approach.
+    // Often times we suggest 1 model per gamemode for example.
     val modelId = "default"
 
-    val sdk = SkillSdk.builder().apiKey(apiKey).baseUrl("http://localhost:8080").build()
+
+    // Build the client, this is where you can pass in the API key
+    // As well as retry / fallback configuration
+    // The SDK performs connection pooling, so it needs to be cleaned up afterwards using .close()
+    val sdk = SkillSdk.builder().apiKey(apiKey).build()
 
     val matchResultRequest =
-            MatchResultRequest(
-                    matchId = "match_id_123",
-                    playerSessions =
-                            listOf(
-                                    PlayerSession(
-                                            playerId = "player1",
-                                            playerScore = 10.0,
-                                            priorMmr = 0.1,
-                                            teamId = "team_a"
-                                    ),
-                                    PlayerSession(
-                                            playerId = "player2",
-                                            playerScore = 15.0,
-                                            priorMmr = 0.2,
-                                            teamId = "team_b"
-                                    )
-                            ),
-                    teams =
-                            listOf(
-                                    TeamInfo(
-                                            teamId = "team_a",
-                                            teamScore = 100.0,
-                                    ),
-                                    TeamInfo(
-                                            teamId = "team_b",
-                                            teamScore = 150.0,
-                                    )
-                            )
-            )
+        MatchResultRequest(
+            matchId = "match_id_123",
+            playerSessions =
+                listOf(
+                    PlayerSession(
+                        playerId = "player1",
+                        playerScore = 10.0,
+                        priorMmr = 0.1,
+                        teamId = "team_a"
+                    ),
+                    PlayerSession(
+                        playerId = "player2",
+                        playerScore = 15.0,
+                        priorMmr = 0.2,
+                        teamId = "team_b"
+                    )
+                ),
+            teams =
+                listOf(
+                    TeamInfo(
+                        teamId = "team_a",
+                        teamScore = 100.0,
+                    ),
+                    TeamInfo(
+                        teamId = "team_b",
+                        teamScore = 150.0,
+                    )
+                )
+        )
 
+    // Using the co-routines api
     runBlocking {
         try {
             val response = sdk.postMatchResult(modelId, matchResultRequest)
@@ -54,6 +64,7 @@ fun main() {
             println("Error posting match result: ${e.message}")
             e.printStackTrace()
         } finally {
+            // The SDK performs connection pooling, calling .close() will clean it up
             sdk.close()
         }
     }

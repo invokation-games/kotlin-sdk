@@ -1,0 +1,14 @@
+{
+  "packages": {
+    "skill-sdk": {
+      "path": "skill-sdk",
+      "release-type": "java",
+      "extra-files": [
+        {
+          "type": "plain-text",
+          "path": "skill-sdk/VERSION"
+        }
+      ]
+    }
+  }
+}
