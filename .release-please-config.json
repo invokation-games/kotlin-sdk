@@ -4,7 +4,7 @@
       "path": "skill-sdk",
       "release-type": "java",
       "extra-files": [
-        "skill-sdk/VERSION"
+        "VERSION"
       ]
     }
   }
