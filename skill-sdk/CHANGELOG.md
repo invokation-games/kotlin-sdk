@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.3](https://github.com/invokation-games/kotlin-sdk/compare/v1.0.2...v1.0.3) (2025-09-09)
+
+
+### Bug Fixes
+
+* fake another release ([3eea084](https://github.com/invokation-games/kotlin-sdk/commit/3eea084761fd27616c4a09a85a22ad577f4f9761))
+
 ## [1.0.2](https://github.com/invokation-games/kotlin-sdk/compare/v1.0.1...v1.0.2) (2025-09-09)
 
 
