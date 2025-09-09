@@ -19,8 +19,7 @@ jobs:
           cache: gradle
 
       - name: Build with Gradle
-        working-directory: skill-sdk
-        run: ./gradlew build
+        run: ./gradlew :skill-sdk:build
 
       - name: Upload binaries to release
         uses: svenstaro/upload-release-action@v2
