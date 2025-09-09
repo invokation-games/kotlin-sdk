@@ -4,7 +4,10 @@
       "path": "skill-sdk",
       "release-type": "java",
       "extra-files": [
-        "VERSION"
+        {
+          "type": "generic",
+          "path": "VERSION"
+        }
       ]
     }
   }
