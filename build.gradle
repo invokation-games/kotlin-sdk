@@ -23,8 +23,6 @@ def javaProjects = [
 configure(javaProjects) {
     println "${project.name}"
     apply plugin: 'org.jetbrains.kotlin.jvm'
-    apply plugin: 'application'
-    version '1.0.0'
     repositories {
         mavenCentral()
     }
@@ -37,4 +35,9 @@ configure(javaProjects) {
     test {
         useJUnitPlatform()
     }
+}
+
+project(":example") {
+    apply plugin: 'application'
+    version '1.0.0'
 }

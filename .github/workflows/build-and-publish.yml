@@ -4,6 +4,10 @@ on:
   release:
     types: [published]
 
+permissions:
+  contents: read
+  packages: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -30,9 +34,8 @@ jobs:
           overwrite: true
           file_glob: true
 
-#      - name: Publish package to GitHub Packages
-#        working-directory: skill-sdk
-#        run: ./gradlew publish
-#        env:
-#          USERNAME: ${{ github.actor }}
-#          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Publish package to GitHub Packages
+        run: ./gradlew :skill-sdk:publish
+        env:
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

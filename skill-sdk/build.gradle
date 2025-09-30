@@ -1,4 +1,4 @@
-group = 'ivk'
+group = 'dev.ivk'
 archivesBaseName = "ivk-skill-sdk"
 version =  file("$projectDir/version.txt").text.trim()
 
@@ -57,4 +57,60 @@ dependencies {
     implementation "com.squareup.okhttp3:okhttp:4.12.0"
     implementation("org.slf4j:slf4j-api:2.0.9")
     testImplementation "io.kotlintest:kotlintest-runner-junit5:3.4.2"
+}
+
+tasks.register('sourcesJar', Jar) {
+    from sourceSets.main.allSource
+    archiveClassifier.set('sources')
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            groupId = project.group
+            artifactId = project.archivesBaseName
+            version = project.version
+
+            from components.java
+            artifact tasks.named('sourcesJar')
+
+            pom {
+                name.set("IVK Skill SDK")
+                description.set("Kotlin SDK for the IVK Skill API with coroutine, blocking, and CompletableFuture APIs.")
+                url.set("https://github.com/invokation-games/kotlin-sdk")
+                licenses {
+                    license {
+                        name.set("Apache License 2.0")
+                        url.set("https://www.apache.org/licenses/LICENSE-2.0")
+                        distribution.set("repo")
+                    }
+                }
+                developers {
+                    developer {
+                        id.set("ivk")
+                        name.set("Robin Van Cauter")
+                        email.set("robin@invokation.games")
+                        organization.set("Invokation")
+                        organizationUrl.set("https://invokation.games")
+                    }
+                }
+                scm {
+                    connection.set("scm:git:https://github.com/invokation-games/kotlin-sdk.git")
+                    developerConnection.set("scm:git:ssh://git@github.com/invokation-games/kotlin-sdk.git")
+                    url.set("https://github.com/invokation-games/kotlin-sdk")
+                }
+            }
+        }
+    }
+    repositories {
+        maven {
+            name = 'GitHubPackages'
+            def githubRepository = System.getenv('GITHUB_REPOSITORY') ?: 'invokation-games/kotlin-sdk'
+            url = uri("https://maven.pkg.github.com/${githubRepository}")
+            credentials {
+                username = System.getenv('USERNAME') ?: System.getenv('GITHUB_ACTOR')
+                password = System.getenv('TOKEN') ?: System.getenv('GITHUB_TOKEN')
+            }
+        }
+    }
 }
