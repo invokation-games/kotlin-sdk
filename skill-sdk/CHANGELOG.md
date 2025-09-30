@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.1.0](https://github.com/invokation-games/kotlin-sdk/compare/v1.0.3...v1.1.0) (2025-09-30)
+
+
+### Features
+
+* add maven github publish ([85e76f8](https://github.com/invokation-games/kotlin-sdk/commit/85e76f80285f968f27445272c60c668a94464ce7))
+
+
+### Bug Fixes
+
+* redo release ([c79ebf0](https://github.com/invokation-games/kotlin-sdk/commit/c79ebf07fda43db386bc0363b12d33c5a426958e))
+
 ## [1.0.3] (2025-09-09)
 
 initial release
