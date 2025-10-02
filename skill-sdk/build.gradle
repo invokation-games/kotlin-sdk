@@ -5,22 +5,27 @@ version =  file("$projectDir/version.txt").text.trim()
 buildscript {
     ext.kotlin_version = '1.9.23'
     ext.spotless_version = "6.25.0"
+    ext.dokka_version = "2.0.0"
 
     repositories {
-        maven { url "https://repo1.maven.org/maven2" }
+        mavenCentral()
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "com.diffplug.spotless:spotless-plugin-gradle:$spotless_version"
+        classpath "org.jetbrains.dokka:dokka-gradle-plugin:$dokka_version"
+
     }
 }
 
 apply plugin: 'kotlin'
 apply plugin: 'maven-publish'
+apply plugin: 'org.jetbrains.dokka'
 apply plugin: 'com.diffplug.spotless'
 
+
 repositories {
-    maven { url "https://repo1.maven.org/maven2" }
+    mavenCentral()
 }
 
 // Use spotless plugin to automatically format code, remove unused import, etc
@@ -63,16 +68,22 @@ tasks.register('sourcesJar', Jar) {
     from sourceSets.main.allSource
     archiveClassifier.set('sources')
 }
+tasks.register('javadocJar', Jar) {
+    dependsOn 'dokkaJavadoc'
+    from "$buildDir/dokka/javadoc"
+    archiveClassifier.set('javadoc')
+}
 
 publishing {
     publications {
-        mavenJava(MavenPublication) {
+        maven(MavenPublication) {
             groupId = project.group
             artifactId = project.archivesBaseName
             version = project.version
 
             from components.java
             artifact tasks.named('sourcesJar')
+            artifact tasks.named('javadocJar')
 
             pom {
                 name.set("IVK Skill SDK")
@@ -104,13 +115,7 @@ publishing {
     }
     repositories {
         maven {
-            name = 'GitHubPackages'
-            def githubRepository = System.getenv('GITHUB_REPOSITORY') ?: 'invokation-games/kotlin-sdk'
-            url = uri("https://maven.pkg.github.com/${githubRepository}")
-            credentials {
-                username = System.getenv('USERNAME') ?: System.getenv('GITHUB_ACTOR')
-                password = System.getenv('TOKEN') ?: System.getenv('GITHUB_TOKEN')
-            }
+            url = rootProject.layout.buildDirectory.dir('staging-deploy')
         }
     }
 }
