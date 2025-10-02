@@ -13,62 +13,32 @@ The resulting source is wrapped with a custom `SkillSdk` class to provide improv
 - Support for coroutines / CompletableFuture / blocking
 
 ## How to use
-You can consume the SDK from GitHub Packages.
+The SDK is available on Maven Central.
 
-Gradle (Groovy DSL):
-```groovy
-repositories {
-    maven {
-        url = uri("https://maven.pkg.github.com/invokation-games/kotlin-sdk")
-        credentials {
-            // Prefer environment variables; do not hardcode secrets
-            username = System.getenv("GITHUB_ACTOR") ?: "<github-username>"
-            password = System.getenv("GITHUB_TOKEN") ?: "<github-token-or-classic-pat>"
-        }
-    }
+### Gradle (Kotlin DSL):
+```kotlin
+dependencies {
+    implementation("dev.ivk:ivk-skill-sdk:<version>")
 }
+```
+
+### Gradle (Groovy DSL):
+```groovy
 dependencies {
     implementation "dev.ivk:ivk-skill-sdk:<version>"
 }
 ```
 
-Maven:
-
-Add credentials in your ~/.m2/settings.xml:
+### Maven:
 ```xml
-<settings>
-  <servers>
-    <server>
-      <id>github</id>
-      <username>${env.GITHUB_ACTOR}</username>
-      <password>${env.GITHUB_TOKEN}</password>
-    </server>
-  </servers>
-</settings>
+<dependency>
+  <groupId>dev.ivk</groupId>
+  <artifactId>ivk-skill-sdk</artifactId>
+  <version>VERSION</version>
+</dependency>
 ```
 
-Add repository and dependency in your pom.xml:
-```xml
-<project>
-  <repositories>
-    <repository>
-      <id>github</id>
-      <name>GitHub Packages</name>
-      <url>https://maven.pkg.github.com/invokation-games/kotlin-sdk</url>
-    </repository>
-  </repositories>
-
-  <dependencies>
-    <dependency>
-      <groupId>dev.ivk</groupId>
-      <artifactId>ivk-skill-sdk</artifactId>
-      <version>VERSION</version>
-    </dependency>
-  </dependencies>
-</project>
-```
-
-Replace VERSION to the release you want to use.
+Replace `<version>` or `VERSION` with the release you want to use. Check [Maven Central](https://central.sonatype.com/artifact/dev.ivk/ivk-skill-sdk) for available versions.
 
 Alternatively, you can download a prebuilt JAR from GitHub Releases and import it into your project.
 
