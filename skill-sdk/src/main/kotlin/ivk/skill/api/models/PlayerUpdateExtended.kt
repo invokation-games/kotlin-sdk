@@ -23,11 +23,14 @@ import com.squareup.moshi.JsonClass
 /**
  * 
  *
- * @param alpha All the teams the player was a part of during this match Calculated scale factor for uncertainty and step sizes typically = 1.0 outside of placement
+ * @param alpha Calculated scale factor for uncertainty and step sizes typically = 1.0 outside of placement
+ * @param botLevel 
  * @param isBot Passthrough from request
+ * @param isFinalPlacement Was this the last match of placement
  * @param maxTs 
  * @param minTs 
  * @param mmrDelta Change in MMR after this match
+ * @param placementFrac All the teams the player was a part of during this match Fraction of placement completed (max of 1.0, but can be negative)
  * @param playerExpected Expected individual outcome for the player (0-1) potentially clamped to a maximum value (typically 0.8) to guarantee minimum payoffs
  * @param playerOutcome Actual individual outcome for the player (0-1)
  * @param playerScoreRate Player score per time unit
@@ -46,13 +49,20 @@ import com.squareup.moshi.JsonClass
 
 data class PlayerUpdateExtended (
 
-    /* All the teams the player was a part of during this match Calculated scale factor for uncertainty and step sizes typically = 1.0 outside of placement */
+    /* Calculated scale factor for uncertainty and step sizes typically = 1.0 outside of placement */
     @Json(name = "alpha")
     val alpha: kotlin.Double,
+
+    @Json(name = "bot_level")
+    val botLevel: kotlin.Double,
 
     /* Passthrough from request */
     @Json(name = "is_bot")
     val isBot: kotlin.Boolean,
+
+    /* Was this the last match of placement */
+    @Json(name = "is_final_placement")
+    val isFinalPlacement: kotlin.Boolean,
 
     @Json(name = "max_ts")
     val maxTs: kotlin.Double,
@@ -63,6 +73,10 @@ data class PlayerUpdateExtended (
     /* Change in MMR after this match */
     @Json(name = "mmr_delta")
     val mmrDelta: kotlin.Double,
+
+    /* All the teams the player was a part of during this match Fraction of placement completed (max of 1.0, but can be negative) */
+    @Json(name = "placement_frac")
+    val placementFrac: kotlin.Double,
 
     /* Expected individual outcome for the player (0-1) potentially clamped to a maximum value (typically 0.8) to guarantee minimum payoffs */
     @Json(name = "player_expected")

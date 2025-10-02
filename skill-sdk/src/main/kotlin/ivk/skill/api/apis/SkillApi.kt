@@ -20,6 +20,7 @@ import okhttp3.Call
 import okhttp3.HttpUrl
 
 import ivk.skill.api.models.ConfigurationResponse
+import ivk.skill.api.models.ErrorResponse
 import ivk.skill.api.models.MatchResultRequest
 import ivk.skill.api.models.MatchResultResponse
 import ivk.skill.api.models.PreMatchRequest

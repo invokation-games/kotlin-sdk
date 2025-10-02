@@ -5,8 +5,11 @@
 | Name | Type | Description | Notes |
 | ------------ | ------------- | ------------- | ------------- |
 | **alpha** | **kotlin.Double** | Calculated scale factor for uncertainty and step sizes Typically &#x3D; 1.0 outside of placement |  |
+| **botLevel** | **kotlin.Double** |  |  |
 | **isBot** | **kotlin.Boolean** | Passthrough from request |  |
+| **isFinalPlacement** | **kotlin.Boolean** | Was this the last match of placement |  |
 | **mmrDelta** | **kotlin.Double** | Expected change in MMR if match ends as predicted |  |
+| **placementFrac** | **kotlin.Double** | Fraction of placement completed (max of 1.0, but can be negative) |  |
 | **playerExpected** | **kotlin.Double** | Expected individual outcome for the player (0-1) Potentially clamped to a maximum value (typically 0.8) to guarantee minimum payoffs |  |
 | **playerWeight** | **kotlin.Double** | How much weight individual outcome is expected to influence MMR |  |
 | **teamExpected** | **kotlin.Double** | Expected weighted average of outcomes for all teams this player is a member of |  |

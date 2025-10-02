@@ -28,9 +28,7 @@
   "paths": {
     "/api/v2/{model_id}/configuration": {
       "get": {
-        "tags": [
-          "Skill"
-        ],
+        "tags": ["Skill"],
         "description": " Get the current model configuration",
         "operationId": "get_configuration",
         "parameters": [
@@ -70,9 +68,7 @@
     },
     "/api/v2/{model_id}/match_result/{environment}": {
       "post": {
-        "tags": [
-          "Skill"
-        ],
+        "tags": ["Skill"],
         "description": "During or after the match, you can retrieve skill rating updates based on the provided player sessions.",
         "operationId": "post_match_result",
         "parameters": [
@@ -377,22 +373,51 @@
             }
           },
           "401": {
-            "description": "Unauthorized to use this model. Missing API key."
+            "description": "Unauthorized to use this model. Missing API key.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
           },
           "403": {
-            "description": "Forbidden. This API key has no access to the specified model."
+            "description": "Forbidden. This API key has no access to the specified model.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
           },
           "404": {
-            "description": "Skill rating model not found"
+            "description": "Skill rating model not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
           }
         }
       }
     },
     "/api/v2/{model_id}/pre_match/{environment}": {
       "post": {
-        "tags": [
-          "Skill"
-        ],
+        "tags": ["Skill"],
         "description": "Useful to calculate the expected outcome.",
         "operationId": "post_pre_match",
         "parameters": [
@@ -512,13 +537,44 @@
             }
           },
           "401": {
-            "description": "Unauthorized to use this model. Missing API key."
+            "description": "Unauthorized to use this model. Missing API key.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
           },
           "403": {
-            "description": "Forbidden. This API key has no access to the specified model."
+            "description": "Forbidden. This API key has no access to the specified model.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
           },
           "404": {
-            "description": "Skill rating model not found"
+            "description": "Skill rating model not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
           }
         }
       }
@@ -528,10 +584,7 @@
     "schemas": {
       "BetaDistribution": {
         "type": "object",
-        "required": [
-          "a",
-          "b"
-        ],
+        "required": ["a", "b"],
         "properties": {
           "a": {
             "type": "number",
@@ -547,11 +600,7 @@
       },
       "ConfigurationResponse": {
         "type": "object",
-        "required": [
-          "id",
-          "revision",
-          "model"
-        ],
+        "required": ["id", "revision", "model"],
         "properties": {
           "id": {
             "type": "string"
@@ -560,6 +609,24 @@
           "revision": {
             "type": "integer",
             "format": "int32"
+          }
+        }
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "description": "A structured JSON error response",
+        "required": ["error", "message"],
+        "properties": {
+          "details": {
+            "description": "Optional additional details about the error"
+          },
+          "error": {
+            "type": "string",
+            "description": "A machine-readable error code"
+          },
+          "message": {
+            "type": "string",
+            "description": "A human-readable error message"
           }
         }
       },
@@ -582,10 +649,7 @@
             "description": "Total duration of the match"
           },
           "match_id": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "description": "Passthrough match_id if provided"
           },
           "max_ts": {
@@ -632,17 +696,11 @@
         "type": "object",
         "properties": {
           "game_mode": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "description": "The gamemode for this match."
           },
           "season": {
-            "type": [
-              "integer",
-              "null"
-            ],
+            "type": ["integer", "null"],
             "format": "int32",
             "description": "The season the match was played in",
             "minimum": 0
@@ -651,31 +709,19 @@
       },
       "MatchResultRequest": {
         "type": "object",
-        "required": [
-          "teams",
-          "player_sessions"
-        ],
+        "required": ["teams", "player_sessions"],
         "properties": {
           "match_end_ts": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "format": "date-time",
             "description": "Time the match ended (ISO 8601 UTC timestamp). Apart from backfilling historical data or simulations, you probably don't need to pass this."
           },
           "match_id": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "description": "Unique match identifier"
           },
           "match_start_ts": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "format": "date-time",
             "description": "Time the match started (ISO 8601 UTC timestamp). Apart from backfilling historical data or simulations, you probably don't need to pass this."
           },
@@ -708,11 +754,7 @@
       },
       "MatchResultResponse": {
         "type": "object",
-        "required": [
-          "match_info",
-          "teams",
-          "players"
-        ],
+        "required": ["match_info", "teams", "players"],
         "properties": {
           "match_info": {
             "$ref": "#/components/schemas/MatchInfo",
@@ -736,13 +778,7 @@
       },
       "PlayerResult": {
         "type": "object",
-        "required": [
-          "player_idx",
-          "player_id",
-          "prior",
-          "post",
-          "extended"
-        ],
+        "required": ["player_idx", "player_id", "prior", "post", "extended"],
         "properties": {
           "extended": {
             "$ref": "#/components/schemas/PlayerUpdateExtended",
@@ -770,27 +806,23 @@
       },
       "PlayerSession": {
         "type": "object",
-        "required": [
-          "player_id",
-          "player_score"
-        ],
+        "required": ["player_id", "player_score"],
         "properties": {
+          "bot_level": {
+            "type": ["number", "null"],
+            "format": "double",
+            "description": "If this is a bot, an optional bot skill level for analytics purposes\nDefault: null"
+          },
           "is_bot": {
             "type": "boolean",
             "description": "Used to flag this session as a Bot session"
           },
           "party_id": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "description": "Local identifier of the player's party.\nIf set, should be unique per party per match.\nDefault behavior is to treat each player as their own party, so party_id can be omitted for games that don't support parties."
           },
           "perf_beta": {
-            "type": [
-              "number",
-              "null"
-            ],
+            "type": ["number", "null"],
             "format": "double",
             "description": "Override for rating uncertainty (advanced option)\nDefault behavior is to use values generated by model"
           },
@@ -804,10 +836,7 @@
             "description": "The player score in this match\nDefault: 0\nIt's up to the game to determine this value. The only requirement is that a higher score is better than a lower score.\nThis value only matters if player performance is configured to have non-zero weight."
           },
           "player_score_start": {
-            "type": [
-              "number",
-              "null"
-            ],
+            "type": ["number", "null"],
             "format": "double",
             "description": "The player's score at the start of this session (advanced option)\nDefault behavior is to inherit player_score from the end of the previous session (recommended)\nUsed for score-per-minute normalization in cases where players can rejoin matches\ne.g. set this to 0 if player scores are reset on rejoin"
           },
@@ -818,20 +847,14 @@
             "minimum": 0
           },
           "prior_mmr": {
-            "type": [
-              "number",
-              "null"
-            ],
+            "type": ["number", "null"],
             "format": "double",
             "description": "The MMR of the player at the start of the match.\nA number between 0 and 1\nDefault: default_mmr specified in the MMR configuration",
             "maximum": 1,
             "minimum": 0
           },
           "prior_momentum": {
-            "type": [
-              "number",
-              "null"
-            ],
+            "type": ["number", "null"],
             "format": "double",
             "description": "Incoming momentum (**not used in most models**)\nFor models with experimental anti-smurfing features or rating acceleration\nEssentially rolling-average win rate"
           },
@@ -839,10 +862,7 @@
             "$ref": "#/components/schemas/PlayerSessionTimestamps"
           },
           "team_id": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "description": "Local identifier of the player's team.\nIf set must match one of the teams provided in the [[MatchResult]].\nDefault behavior is to treat each player as their own team, so team_id can be omitted for 1v1 or free-for-all modes."
           }
         }
@@ -850,10 +870,7 @@
       "PlayerSessionTimestamps": {
         "type": "object",
         "description": "Start & end timestamp",
-        "required": [
-          "start",
-          "end"
-        ],
+        "required": ["start", "end"],
         "properties": {
           "end": {
             "type": "number",
@@ -872,6 +889,8 @@
         "required": [
           "session_count",
           "team_count",
+          "placement_frac",
+          "is_final_placement",
           "alpha",
           "team_weight",
           "player_weight",
@@ -887,17 +906,26 @@
           "mmr_delta",
           "min_ts",
           "max_ts",
-          "is_bot"
+          "is_bot",
+          "bot_level"
         ],
         "properties": {
           "alpha": {
             "type": "number",
             "format": "double",
-            "description": "All the teams the player was a part of during this match\nCalculated scale factor for uncertainty and step sizes\ntypically = 1.0 outside of placement"
+            "description": "Calculated scale factor for uncertainty and step sizes\ntypically = 1.0 outside of placement"
+          },
+          "bot_level": {
+            "type": "number",
+            "format": "double"
           },
           "is_bot": {
             "type": "boolean",
             "description": "Passthrough from request"
+          },
+          "is_final_placement": {
+            "type": "boolean",
+            "description": "Was this the last match of placement"
           },
           "max_ts": {
             "type": "number",
@@ -911,6 +939,11 @@
             "type": "number",
             "format": "double",
             "description": "Change in MMR after this match"
+          },
+          "placement_frac": {
+            "type": "number",
+            "format": "double",
+            "description": "All the teams the player was a part of during this match\nFraction of placement completed (max of 1.0, but can be negative)"
           },
           "player_expected": {
             "type": "number",
@@ -991,10 +1024,7 @@
         ],
         "properties": {
           "match_id": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "description": "Passthrough match_id if provided"
           },
           "mean_mmr": {
@@ -1029,13 +1059,7 @@
       },
       "PreMatchPlayerResult": {
         "type": "object",
-        "required": [
-          "player_idx",
-          "player_id",
-          "prior",
-          "post",
-          "extended"
-        ],
+        "required": ["player_idx", "player_id", "prior", "post", "extended"],
         "properties": {
           "extended": {
             "$ref": "#/components/schemas/PreMatchPlayerResultExtended",
@@ -1072,7 +1096,10 @@
           "unified_expected",
           "unified_expected_dist",
           "mmr_delta",
-          "is_bot"
+          "is_bot",
+          "bot_level",
+          "placement_frac",
+          "is_final_placement"
         ],
         "properties": {
           "alpha": {
@@ -1080,14 +1107,27 @@
             "format": "double",
             "description": "Calculated scale factor for uncertainty and step sizes\nTypically = 1.0 outside of placement"
           },
+          "bot_level": {
+            "type": "number",
+            "format": "double"
+          },
           "is_bot": {
             "type": "boolean",
             "description": "Passthrough from request"
+          },
+          "is_final_placement": {
+            "type": "boolean",
+            "description": "Was this the last match of placement"
           },
           "mmr_delta": {
             "type": "number",
             "format": "double",
             "description": "Expected change in MMR if match ends as predicted"
+          },
+          "placement_frac": {
+            "type": "number",
+            "format": "double",
+            "description": "Fraction of placement completed (max of 1.0, but can be negative)"
           },
           "player_expected": {
             "type": "number",
@@ -1122,26 +1162,23 @@
       },
       "PreMatchPlayerSession": {
         "type": "object",
-        "required": [
-          "player_id"
-        ],
+        "required": ["player_id"],
         "properties": {
+          "bot_level": {
+            "type": ["number", "null"],
+            "format": "double",
+            "description": "If this is a bot, an optional bot skill level for analytics purposes\nDefault: null"
+          },
           "is_bot": {
             "type": "boolean",
             "description": "Used to flag this session as a Bot session"
           },
           "party_id": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "description": "Local identifier of the player's party\nIf set, should be unique per party per match\nDefault behavior is to treat each player as their own party, so party_id can be omitted for games that don't support parties."
           },
           "perf_beta": {
-            "type": [
-              "number",
-              "null"
-            ],
+            "type": ["number", "null"],
             "format": "double",
             "description": "Override for rating uncertainty (advanced option)\nDefault behavior is to use values generated by model"
           },
@@ -1156,42 +1193,27 @@
             "minimum": 0
           },
           "prior_mmr": {
-            "type": [
-              "number",
-              "null"
-            ],
+            "type": ["number", "null"],
             "format": "double",
             "description": "The MMR of the player at the start of the match.\nA number between 0 and 1\nDefault: default_mmr specified in the MMR configuration"
           },
           "prior_momentum": {
-            "type": [
-              "number",
-              "null"
-            ],
+            "type": ["number", "null"],
             "format": "double",
             "description": "Incoming momentum (**not used in most models**)\nFor models with experimental anti-smurfing features or rating acceleration\nEssentially rolling-average win rate"
           },
           "team_id": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "description": "Local identifier of the player's team\nIf set must match one of the teams provided in the [[MatchResult]]\nDefault behavior is to treat each player as their own team, so team_id can be omitted for 1v1 or free-for-all modes."
           }
         }
       },
       "PreMatchRequest": {
         "type": "object",
-        "required": [
-          "player_sessions",
-          "teams"
-        ],
+        "required": ["player_sessions", "teams"],
         "properties": {
           "match_id": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "description": "Unique match identifier"
           },
           "metadata": {
@@ -1223,11 +1245,7 @@
       },
       "PreMatchResponse": {
         "type": "object",
-        "required": [
-          "match_info",
-          "teams",
-          "players"
-        ],
+        "required": ["match_info", "teams", "players"],
         "properties": {
           "match_info": {
             "$ref": "#/components/schemas/PreMatchInfo",
@@ -1251,9 +1269,7 @@
       },
       "PreMatchTeamInfo": {
         "type": "object",
-        "required": [
-          "team_id"
-        ],
+        "required": ["team_id"],
         "properties": {
           "team_id": {
             "type": "string",
@@ -1320,11 +1336,7 @@
       },
       "PriorPlayerStats": {
         "type": "object",
-        "required": [
-          "games_played",
-          "mmr",
-          "momentum"
-        ],
+        "required": ["games_played", "mmr", "momentum"],
         "properties": {
           "games_played": {
             "type": "integer",
@@ -1346,10 +1358,7 @@
       },
       "TeamInfo": {
         "type": "object",
-        "required": [
-          "team_id",
-          "team_score"
-        ],
+        "required": ["team_id", "team_score"],
         "properties": {
           "team_id": {
             "type": "string",
@@ -1418,10 +1427,7 @@
             "minimum": 0
           },
           "score": {
-            "type": [
-              "number",
-              "null"
-            ],
+            "type": ["number", "null"],
             "format": "double",
             "description": "Score of the team (passthrough)"
           },

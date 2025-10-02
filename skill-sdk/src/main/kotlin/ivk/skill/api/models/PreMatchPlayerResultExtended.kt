@@ -24,8 +24,11 @@ import com.squareup.moshi.JsonClass
  * 
  *
  * @param alpha Calculated scale factor for uncertainty and step sizes Typically = 1.0 outside of placement
+ * @param botLevel 
  * @param isBot Passthrough from request
+ * @param isFinalPlacement Was this the last match of placement
  * @param mmrDelta Expected change in MMR if match ends as predicted
+ * @param placementFrac Fraction of placement completed (max of 1.0, but can be negative)
  * @param playerExpected Expected individual outcome for the player (0-1) Potentially clamped to a maximum value (typically 0.8) to guarantee minimum payoffs
  * @param playerWeight How much weight individual outcome is expected to influence MMR
  * @param teamExpected Expected weighted average of outcomes for all teams this player is a member of
@@ -41,13 +44,24 @@ data class PreMatchPlayerResultExtended (
     @Json(name = "alpha")
     val alpha: kotlin.Double,
 
+    @Json(name = "bot_level")
+    val botLevel: kotlin.Double,
+
     /* Passthrough from request */
     @Json(name = "is_bot")
     val isBot: kotlin.Boolean,
 
+    /* Was this the last match of placement */
+    @Json(name = "is_final_placement")
+    val isFinalPlacement: kotlin.Boolean,
+
     /* Expected change in MMR if match ends as predicted */
     @Json(name = "mmr_delta")
     val mmrDelta: kotlin.Double,
+
+    /* Fraction of placement completed (max of 1.0, but can be negative) */
+    @Json(name = "placement_frac")
+    val placementFrac: kotlin.Double,
 
     /* Expected individual outcome for the player (0-1) Potentially clamped to a maximum value (typically 0.8) to guarantee minimum payoffs */
     @Json(name = "player_expected")
