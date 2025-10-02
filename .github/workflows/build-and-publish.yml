@@ -34,14 +34,8 @@ jobs:
           overwrite: true
           file_glob: true
 
-      - name: Publish package to GitHub Packages
-        run: ./gradlew :skill-sdk:publish
-        env:
-          GITHUB_ACTOR: ${{ github.actor }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Publish to Maven Central
-        run: ./gradlew :skill-sdk:publish jreleaserDeploy
+        run: ./gradlew clean :skill-sdk:publish jreleaserDeploy
         env:
           JRELEASER_GPG_PASSPHRASE: ${{ secrets.JRELEASER_GPG_PASSPHRASE }}
           JRELEASER_GPG_SECRET_KEY: ${{ secrets.JRELEASER_GPG_SECRET_KEY }}
