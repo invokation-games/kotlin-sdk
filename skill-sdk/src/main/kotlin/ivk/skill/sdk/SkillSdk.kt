@@ -54,7 +54,6 @@ import org.slf4j.LoggerFactory
  *
  * @property apiKey The API key for authentication
  * @property baseUrl The base URL for the API
- * @property modelId The model ID to use
  * @property environment The environment to target
  * @property retryConfig Configuration for retry behavior
  */
@@ -92,6 +91,7 @@ private constructor(
     /**
      * Submit match results to update player skill ratings.
      *
+     * @param modelId The model ID to use
      * @param matchResultRequest The match result data
      * @return MatchResultResponse containing updated skill ratings
      * @throws IOException if network error occurs after all retries
@@ -114,6 +114,7 @@ private constructor(
     /**
      * Calculate expected match outcomes before the match starts.
      *
+     * @param modelId The model ID to use
      * @param preMatchRequest The pre-match data with player information
      * @return PreMatchResponse containing expected outcomes
      * @throws IOException if network error occurs after all retries
