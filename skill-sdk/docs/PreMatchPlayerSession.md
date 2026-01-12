@@ -5,6 +5,7 @@
 | Name | Type | Description | Notes |
 | ------------ | ------------- | ------------- | ------------- |
 | **playerId** | **kotlin.String** | The unique identifier of the player |  |
+| **adjustedMmr** | **kotlin.Double** | Adjusted MMR that was used for matchmaking / team-balancing. For example; players who are in a party will often perform better than their individual MMR would suggest A matchmaker or teambalancer might take this into account by calculating a bonus to the MMR However, such a bonus could cause a party to gain more or lose less MMR than they would otherwise By providing this value, we can compensate for this effect. |  [optional] |
 | **botLevel** | **kotlin.Double** | If this is a bot, an optional bot skill level for analytics purposes Default: null |  [optional] |
 | **isBot** | **kotlin.Boolean** | Used to flag this session as a Bot session |  [optional] |
 | **partyId** | **kotlin.String** | Local identifier of the player&#39;s party If set, should be unique per party per match Default behavior is to treat each player as their own party, so party_id can be omitted for games that don&#39;t support parties. |  [optional] |
@@ -12,7 +13,7 @@
 | **priorGamesPlayed** | **kotlin.Long** | The previous number of games the player has played (ever, or just this season). |  [optional] |
 | **priorMmr** | **kotlin.Double** | The MMR of the player at the start of the match. A number between 0 and 1 Default: default_mmr specified in the MMR configuration |  [optional] |
 | **priorMomentum** | **kotlin.Double** | Incoming momentum (**not used in most models**) For models with experimental anti-smurfing features or rating acceleration Essentially rolling-average win rate |  [optional] |
-| **teamId** | **kotlin.String** | Local identifier of the player&#39;s team If set must match one of the teams provided in the [[MatchResult]] Default behavior is to treat each player as their own team, so team_id can be omitted for 1v1 or free-for-all modes. |  [optional] |
+| **teamId** | **kotlin.String** | Local identifier of the player&#39;s team If set must match one of the teams provided in the MatchResult Default behavior is to treat each player as their own team, so team_id can be omitted for 1v1 or free-for-all modes. |  [optional] |
 
 
 
