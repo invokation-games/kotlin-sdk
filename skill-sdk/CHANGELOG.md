@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/invokation-games/kotlin-sdk/compare/v1.2.0...v1.3.0) (2026-01-12)
+
+
+### Features
+
+* sync openapi spec ([#19](https://github.com/invokation-games/kotlin-sdk/issues/19)) ([6b98cfb](https://github.com/invokation-games/kotlin-sdk/commit/6b98cfb345797d39c25db403bf0bf73c0d01c22b))
+
 ## [1.2.0](https://github.com/invokation-games/kotlin-sdk/compare/v1.1.0...v1.2.0) (2025-10-02)
 
 
