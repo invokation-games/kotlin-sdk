@@ -15,7 +15,7 @@ All URIs are relative to *https://skill.ivk.dev*
 
 
 
- Get the current model configuration
+ Get the current active model configuration
 
 ### Example
 ```kotlin

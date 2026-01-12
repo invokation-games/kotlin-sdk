@@ -63,4 +63,3 @@ src/main/kotlin/ivk/skill/api/models/PreMatchTeamResult.kt
 src/main/kotlin/ivk/skill/api/models/PriorPlayerStats.kt
 src/main/kotlin/ivk/skill/api/models/TeamInfo.kt
 src/main/kotlin/ivk/skill/api/models/TeamResult.kt
-src/test/kotlin/ivk/skill/api/models/ErrorResponseTest.kt
