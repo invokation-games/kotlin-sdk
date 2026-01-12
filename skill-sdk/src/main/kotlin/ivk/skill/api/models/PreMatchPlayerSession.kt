@@ -23,6 +23,7 @@ import com.squareup.moshi.JsonClass
  * 
  *
  * @param playerId The unique identifier of the player
+ * @param adjustedMmr Adjusted MMR that was used for matchmaking / team-balancing. For example; players who are in a party will often perform better than their individual MMR would suggest A matchmaker or teambalancer might take this into account by calculating a bonus to the MMR However, such a bonus could cause a party to gain more or lose less MMR than they would otherwise By providing this value, we can compensate for this effect.
  * @param botLevel If this is a bot, an optional bot skill level for analytics purposes Default: null
  * @param isBot Used to flag this session as a Bot session
  * @param partyId Local identifier of the player's party If set, should be unique per party per match Default behavior is to treat each player as their own party, so party_id can be omitted for games that don't support parties.
@@ -30,7 +31,7 @@ import com.squareup.moshi.JsonClass
  * @param priorGamesPlayed The previous number of games the player has played (ever, or just this season).
  * @param priorMmr The MMR of the player at the start of the match. A number between 0 and 1 Default: default_mmr specified in the MMR configuration
  * @param priorMomentum Incoming momentum (**not used in most models**) For models with experimental anti-smurfing features or rating acceleration Essentially rolling-average win rate
- * @param teamId Local identifier of the player's team If set must match one of the teams provided in the [[MatchResult]] Default behavior is to treat each player as their own team, so team_id can be omitted for 1v1 or free-for-all modes.
+ * @param teamId Local identifier of the player's team If set must match one of the teams provided in the MatchResult Default behavior is to treat each player as their own team, so team_id can be omitted for 1v1 or free-for-all modes.
  */
 
 
@@ -39,6 +40,10 @@ data class PreMatchPlayerSession (
     /* The unique identifier of the player */
     @Json(name = "player_id")
     val playerId: kotlin.String,
+
+    /* Adjusted MMR that was used for matchmaking / team-balancing. For example; players who are in a party will often perform better than their individual MMR would suggest A matchmaker or teambalancer might take this into account by calculating a bonus to the MMR However, such a bonus could cause a party to gain more or lose less MMR than they would otherwise By providing this value, we can compensate for this effect. */
+    @Json(name = "adjusted_mmr")
+    val adjustedMmr: kotlin.Double? = null,
 
     /* If this is a bot, an optional bot skill level for analytics purposes Default: null */
     @Json(name = "bot_level")
@@ -68,7 +73,7 @@ data class PreMatchPlayerSession (
     @Json(name = "prior_momentum")
     val priorMomentum: kotlin.Double? = null,
 
-    /* Local identifier of the player's team If set must match one of the teams provided in the [[MatchResult]] Default behavior is to treat each player as their own team, so team_id can be omitted for 1v1 or free-for-all modes. */
+    /* Local identifier of the player's team If set must match one of the teams provided in the MatchResult Default behavior is to treat each player as their own team, so team_id can be omitted for 1v1 or free-for-all modes. */
     @Json(name = "team_id")
     val teamId: kotlin.String? = null
 
