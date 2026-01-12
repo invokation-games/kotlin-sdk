@@ -44,7 +44,7 @@ import ivk.skill.api.infrastructure.ResponseType
 import ivk.skill.api.infrastructure.Success
 import ivk.skill.api.infrastructure.toMultiValue
 
-class SkillApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = ApiClient.defaultClient) : ApiClient(basePath, client) {
+open class SkillApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = ApiClient.defaultClient) : ApiClient(basePath, client) {
     companion object {
         @JvmStatic
         val defaultBasePath: String by lazy {
@@ -55,7 +55,7 @@ class SkillApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     /**
      * GET /api/v2/{model_id}/configuration
      * 
-     *  Get the current model configuration
+     *  Get the current active model configuration
      * @param modelId ID of the skill rating model
      * @return ConfigurationResponse
      * @throws IllegalStateException If the request is not correctly configured
@@ -87,7 +87,7 @@ class SkillApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory =
     /**
      * GET /api/v2/{model_id}/configuration
      * 
-     *  Get the current model configuration
+     *  Get the current active model configuration
      * @param modelId ID of the skill rating model
      * @return ApiResponse<ConfigurationResponse?>
      * @throws IllegalStateException If the request is not correctly configured
