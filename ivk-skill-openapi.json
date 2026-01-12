@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "Invokation API",
-    "description": "## Introduction\nWelcome to the Invokation REST API.\n\nSoon you too will wield the full power of our skill ratings and matchmaking systems.\n\n## Authentication\nThe Invokation API uses API keys to authenticate requests. You can view and manage your API keys in the Invokation dashboard.\n\nYour API keys carry many privileges, make sure to keep them secure!\nDo not share your secret API keys in publiccly accessible areas such as Github, client-side code and so forth.\n\nAll API requests must be made over [HTTPS](http://en.wikipedia.org/wiki/HTTP_Secure). Calls made over plain HTTP will fail.\nAPI requests without authentication will also fail.\n\n## Compression\n\nYou can enable compression by including the `Accept-Encoding` header in your request.\n\nWe support the following compression algorithms: `zstd`, `br`, `gzip` or `deflate`.\n\n\n## Support\nIf you need help, don't hesitate to reach out to us at support@invokation.games or join our [Community Discord](https://discord.gg/JfNGsunrjX).\n",
+    "description": "## Introduction\nWelcome to the Invokation REST API.\n\nSoon you too will wield the full power of our skill ratings and matchmaking systems.\n\n## Authentication\nThe Invokation API uses API keys to authenticate requests. You can view and manage your API keys in the Invokation dashboard.\n\nYour API keys carry many privileges, make sure to keep them secure!\nDo not share your secret API keys in publicly accessible areas such as Github, client-side code and so forth.\n\nAll API requests must be made over [HTTPS](http://en.wikipedia.org/wiki/HTTP_Secure). Calls made over plain HTTP will fail.\nAPI requests without authentication will also fail.\n\n## Compression\n\nYou can enable compression by including the `Accept-Encoding` header in your request.\n\nWe support the following compression algorithms: `zstd`, `br`, `gzip` or `deflate`.\n\n\n## Support\nIf you need help, don't hesitate to reach out to us at support@invokation.games or join our [Community Discord](https://discord.gg/JfNGsunrjX).\n",
     "termsOfService": "https://invokation.games",
     "contact": {
       "name": "Invokation",
@@ -28,8 +28,10 @@
   "paths": {
     "/api/v2/{model_id}/configuration": {
       "get": {
-        "tags": ["Skill"],
-        "description": " Get the current model configuration",
+        "tags": [
+          "Skill"
+        ],
+        "description": " Get the current active model configuration",
         "operationId": "get_configuration",
         "parameters": [
           {
@@ -68,7 +70,9 @@
     },
     "/api/v2/{model_id}/match_result/{environment}": {
       "post": {
-        "tags": ["Skill"],
+        "tags": [
+          "Skill"
+        ],
         "description": "During or after the match, you can retrieve skill rating updates based on the provided player sessions.",
         "operationId": "post_match_result",
         "parameters": [
@@ -417,7 +421,9 @@
     },
     "/api/v2/{model_id}/pre_match/{environment}": {
       "post": {
-        "tags": ["Skill"],
+        "tags": [
+          "Skill"
+        ],
         "description": "Useful to calculate the expected outcome.",
         "operationId": "post_pre_match",
         "parameters": [
@@ -584,7 +590,10 @@
     "schemas": {
       "BetaDistribution": {
         "type": "object",
-        "required": ["a", "b"],
+        "required": [
+          "a",
+          "b"
+        ],
         "properties": {
           "a": {
             "type": "number",
@@ -600,7 +609,11 @@
       },
       "ConfigurationResponse": {
         "type": "object",
-        "required": ["id", "revision", "model"],
+        "required": [
+          "id",
+          "revision",
+          "model"
+        ],
         "properties": {
           "id": {
             "type": "string"
@@ -615,7 +628,10 @@
       "ErrorResponse": {
         "type": "object",
         "description": "A structured JSON error response",
-        "required": ["error", "message"],
+        "required": [
+          "error",
+          "message"
+        ],
         "properties": {
           "details": {
             "description": "Optional additional details about the error"
@@ -649,7 +665,10 @@
             "description": "Total duration of the match"
           },
           "match_id": {
-            "type": ["string", "null"],
+            "type": [
+              "string",
+              "null"
+            ],
             "description": "Passthrough match_id if provided"
           },
           "max_ts": {
@@ -696,11 +715,17 @@
         "type": "object",
         "properties": {
           "game_mode": {
-            "type": ["string", "null"],
+            "type": [
+              "string",
+              "null"
+            ],
             "description": "The gamemode for this match."
           },
           "season": {
-            "type": ["integer", "null"],
+            "type": [
+              "integer",
+              "null"
+            ],
             "format": "int32",
             "description": "The season the match was played in",
             "minimum": 0
@@ -709,19 +734,31 @@
       },
       "MatchResultRequest": {
         "type": "object",
-        "required": ["teams", "player_sessions"],
+        "required": [
+          "teams",
+          "player_sessions"
+        ],
         "properties": {
           "match_end_ts": {
-            "type": ["string", "null"],
+            "type": [
+              "string",
+              "null"
+            ],
             "format": "date-time",
             "description": "Time the match ended (ISO 8601 UTC timestamp). Apart from backfilling historical data or simulations, you probably don't need to pass this."
           },
           "match_id": {
-            "type": ["string", "null"],
+            "type": [
+              "string",
+              "null"
+            ],
             "description": "Unique match identifier"
           },
           "match_start_ts": {
-            "type": ["string", "null"],
+            "type": [
+              "string",
+              "null"
+            ],
             "format": "date-time",
             "description": "Time the match started (ISO 8601 UTC timestamp). Apart from backfilling historical data or simulations, you probably don't need to pass this."
           },
@@ -754,7 +791,11 @@
       },
       "MatchResultResponse": {
         "type": "object",
-        "required": ["match_info", "teams", "players"],
+        "required": [
+          "match_info",
+          "teams",
+          "players"
+        ],
         "properties": {
           "match_info": {
             "$ref": "#/components/schemas/MatchInfo",
@@ -778,7 +819,13 @@
       },
       "PlayerResult": {
         "type": "object",
-        "required": ["player_idx", "player_id", "prior", "post", "extended"],
+        "required": [
+          "player_idx",
+          "player_id",
+          "prior",
+          "post",
+          "extended"
+        ],
         "properties": {
           "extended": {
             "$ref": "#/components/schemas/PlayerUpdateExtended",
@@ -806,10 +853,24 @@
       },
       "PlayerSession": {
         "type": "object",
-        "required": ["player_id", "player_score"],
+        "required": [
+          "player_id",
+          "player_score"
+        ],
         "properties": {
+          "adjusted_mmr": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "format": "double",
+            "description": "Adjusted MMR that was used for matchmaking / team-balancing.\nFor example; players who are in a party will often perform better than their individual MMR would suggest\nA matchmaker or teambalancer might take this into account by calculating a bonus to the MMR\nHowever, such a bonus could cause a party to gain more or lose less MMR than they would otherwise\nBy providing this value, we can compensate for this effect."
+          },
           "bot_level": {
-            "type": ["number", "null"],
+            "type": [
+              "number",
+              "null"
+            ],
             "format": "double",
             "description": "If this is a bot, an optional bot skill level for analytics purposes\nDefault: null"
           },
@@ -818,11 +879,17 @@
             "description": "Used to flag this session as a Bot session"
           },
           "party_id": {
-            "type": ["string", "null"],
+            "type": [
+              "string",
+              "null"
+            ],
             "description": "Local identifier of the player's party.\nIf set, should be unique per party per match.\nDefault behavior is to treat each player as their own party, so party_id can be omitted for games that don't support parties."
           },
           "perf_beta": {
-            "type": ["number", "null"],
+            "type": [
+              "number",
+              "null"
+            ],
             "format": "double",
             "description": "Override for rating uncertainty (advanced option)\nDefault behavior is to use values generated by model"
           },
@@ -836,7 +903,10 @@
             "description": "The player score in this match\nDefault: 0\nIt's up to the game to determine this value. The only requirement is that a higher score is better than a lower score.\nThis value only matters if player performance is configured to have non-zero weight."
           },
           "player_score_start": {
-            "type": ["number", "null"],
+            "type": [
+              "number",
+              "null"
+            ],
             "format": "double",
             "description": "The player's score at the start of this session (advanced option)\nDefault behavior is to inherit player_score from the end of the previous session (recommended)\nUsed for score-per-minute normalization in cases where players can rejoin matches\ne.g. set this to 0 if player scores are reset on rejoin"
           },
@@ -847,14 +917,20 @@
             "minimum": 0
           },
           "prior_mmr": {
-            "type": ["number", "null"],
+            "type": [
+              "number",
+              "null"
+            ],
             "format": "double",
             "description": "The MMR of the player at the start of the match.\nA number between 0 and 1\nDefault: default_mmr specified in the MMR configuration",
             "maximum": 1,
             "minimum": 0
           },
           "prior_momentum": {
-            "type": ["number", "null"],
+            "type": [
+              "number",
+              "null"
+            ],
             "format": "double",
             "description": "Incoming momentum (**not used in most models**)\nFor models with experimental anti-smurfing features or rating acceleration\nEssentially rolling-average win rate"
           },
@@ -862,15 +938,21 @@
             "$ref": "#/components/schemas/PlayerSessionTimestamps"
           },
           "team_id": {
-            "type": ["string", "null"],
-            "description": "Local identifier of the player's team.\nIf set must match one of the teams provided in the [[MatchResult]].\nDefault behavior is to treat each player as their own team, so team_id can be omitted for 1v1 or free-for-all modes."
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Local identifier of the player's team.\nIf set must match one of the teams provided in the MatchResult.\nDefault behavior is to treat each player as their own team, so team_id can be omitted for 1v1 or free-for-all modes."
           }
         }
       },
       "PlayerSessionTimestamps": {
         "type": "object",
         "description": "Start & end timestamp",
-        "required": ["start", "end"],
+        "required": [
+          "start",
+          "end"
+        ],
         "properties": {
           "end": {
             "type": "number",
@@ -1024,7 +1106,10 @@
         ],
         "properties": {
           "match_id": {
-            "type": ["string", "null"],
+            "type": [
+              "string",
+              "null"
+            ],
             "description": "Passthrough match_id if provided"
           },
           "mean_mmr": {
@@ -1059,7 +1144,13 @@
       },
       "PreMatchPlayerResult": {
         "type": "object",
-        "required": ["player_idx", "player_id", "prior", "post", "extended"],
+        "required": [
+          "player_idx",
+          "player_id",
+          "prior",
+          "post",
+          "extended"
+        ],
         "properties": {
           "extended": {
             "$ref": "#/components/schemas/PreMatchPlayerResultExtended",
@@ -1162,10 +1253,23 @@
       },
       "PreMatchPlayerSession": {
         "type": "object",
-        "required": ["player_id"],
+        "required": [
+          "player_id"
+        ],
         "properties": {
+          "adjusted_mmr": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "format": "double",
+            "description": "Adjusted MMR that was used for matchmaking / team-balancing.\nFor example; players who are in a party will often perform better than their individual MMR would suggest\nA matchmaker or teambalancer might take this into account by calculating a bonus to the MMR\nHowever, such a bonus could cause a party to gain more or lose less MMR than they would otherwise\nBy providing this value, we can compensate for this effect."
+          },
           "bot_level": {
-            "type": ["number", "null"],
+            "type": [
+              "number",
+              "null"
+            ],
             "format": "double",
             "description": "If this is a bot, an optional bot skill level for analytics purposes\nDefault: null"
           },
@@ -1174,11 +1278,17 @@
             "description": "Used to flag this session as a Bot session"
           },
           "party_id": {
-            "type": ["string", "null"],
+            "type": [
+              "string",
+              "null"
+            ],
             "description": "Local identifier of the player's party\nIf set, should be unique per party per match\nDefault behavior is to treat each player as their own party, so party_id can be omitted for games that don't support parties."
           },
           "perf_beta": {
-            "type": ["number", "null"],
+            "type": [
+              "number",
+              "null"
+            ],
             "format": "double",
             "description": "Override for rating uncertainty (advanced option)\nDefault behavior is to use values generated by model"
           },
@@ -1193,27 +1303,42 @@
             "minimum": 0
           },
           "prior_mmr": {
-            "type": ["number", "null"],
+            "type": [
+              "number",
+              "null"
+            ],
             "format": "double",
             "description": "The MMR of the player at the start of the match.\nA number between 0 and 1\nDefault: default_mmr specified in the MMR configuration"
           },
           "prior_momentum": {
-            "type": ["number", "null"],
+            "type": [
+              "number",
+              "null"
+            ],
             "format": "double",
             "description": "Incoming momentum (**not used in most models**)\nFor models with experimental anti-smurfing features or rating acceleration\nEssentially rolling-average win rate"
           },
           "team_id": {
-            "type": ["string", "null"],
-            "description": "Local identifier of the player's team\nIf set must match one of the teams provided in the [[MatchResult]]\nDefault behavior is to treat each player as their own team, so team_id can be omitted for 1v1 or free-for-all modes."
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Local identifier of the player's team\nIf set must match one of the teams provided in the MatchResult\nDefault behavior is to treat each player as their own team, so team_id can be omitted for 1v1 or free-for-all modes."
           }
         }
       },
       "PreMatchRequest": {
         "type": "object",
-        "required": ["player_sessions", "teams"],
+        "required": [
+          "player_sessions",
+          "teams"
+        ],
         "properties": {
           "match_id": {
-            "type": ["string", "null"],
+            "type": [
+              "string",
+              "null"
+            ],
             "description": "Unique match identifier"
           },
           "metadata": {
@@ -1245,7 +1370,11 @@
       },
       "PreMatchResponse": {
         "type": "object",
-        "required": ["match_info", "teams", "players"],
+        "required": [
+          "match_info",
+          "teams",
+          "players"
+        ],
         "properties": {
           "match_info": {
             "$ref": "#/components/schemas/PreMatchInfo",
@@ -1269,7 +1398,9 @@
       },
       "PreMatchTeamInfo": {
         "type": "object",
-        "required": ["team_id"],
+        "required": [
+          "team_id"
+        ],
         "properties": {
           "team_id": {
             "type": "string",
@@ -1336,7 +1467,11 @@
       },
       "PriorPlayerStats": {
         "type": "object",
-        "required": ["games_played", "mmr", "momentum"],
+        "required": [
+          "games_played",
+          "mmr",
+          "momentum"
+        ],
         "properties": {
           "games_played": {
             "type": "integer",
@@ -1358,7 +1493,10 @@
       },
       "TeamInfo": {
         "type": "object",
-        "required": ["team_id", "team_score"],
+        "required": [
+          "team_id",
+          "team_score"
+        ],
         "properties": {
           "team_id": {
             "type": "string",
@@ -1427,7 +1565,10 @@
             "minimum": 0
           },
           "score": {
-            "type": ["number", "null"],
+            "type": [
+              "number",
+              "null"
+            ],
             "format": "double",
             "description": "Score of the team (passthrough)"
           },
