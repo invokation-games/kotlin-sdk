@@ -27,7 +27,9 @@ jobs:
           app-id: ${{ secrets.WIZARD_APP_ID }}
           private-key: ${{ secrets.WIZARD_PRIVATE_KEY }}
           owner: invokation-games
-          repositories: ivk-skill # Grant access to the private API repo
+          repositories: |
+            ivk-skill
+            kotlin-sdk
 
       - name: Download latest OpenAPI spec
         env:
