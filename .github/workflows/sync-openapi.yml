@@ -70,8 +70,8 @@ jobs:
           commit-message: "chore: sync openapi spec"
           title: "chore: sync openapi spec"
           body: |
-            Automated sync of OpenAPI specification from production.
-
-            Source: https://skill.ivk.dev/openapi.json
+            Automated sync of OpenAPI specification from latest api release.
           branch: chore/sync-openapi
+          committer: Code Wizard <noreply@invokation.games>
+          author: Code Wizard <noreply@invokation.games>
           delete-branch: true
