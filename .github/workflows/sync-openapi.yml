@@ -69,11 +69,11 @@ jobs:
         uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ steps.token.outputs.token }}
-          commit-message: "chore: sync openapi spec"
-          title: "chore: sync openapi spec"
+          commit-message: "feat: sync openapi spec"
+          title: "feat: sync openapi spec"
           body: |
             Automated sync of OpenAPI specification from latest api release.
           branch: chore/sync-openapi
-          committer: the-release-wizard[bot] <the-release-wizard[bot]@users.noreply.github.com>
-          author: the-release-wizard[bot] <the-release-wizard[bot]@users.noreply.github.com>
+          # committer: the-release-wizard[bot] <the-release-wizard[bot]@users.noreply.github.com>
+          # author: the-release-wizard[bot] <the-release-wizard[bot]@users.noreply.github.com>
           delete-branch: true
