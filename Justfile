@@ -3,3 +3,6 @@ generate-sdk:
 
 build-sdk:
     ./gradlew :skill-sdk:build
+
+test:
+    ./gradlew :skill-sdk:test
