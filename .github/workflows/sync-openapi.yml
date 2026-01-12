@@ -74,6 +74,4 @@ jobs:
           body: |
             Automated sync of OpenAPI specification from latest api release.
           branch: chore/sync-openapi
-          # committer: the-release-wizard[bot] <the-release-wizard[bot]@users.noreply.github.com>
-          # author: the-release-wizard[bot] <the-release-wizard[bot]@users.noreply.github.com>
           delete-branch: true
