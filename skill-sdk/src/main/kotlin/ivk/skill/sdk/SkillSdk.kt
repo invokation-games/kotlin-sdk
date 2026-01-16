@@ -13,6 +13,7 @@ import java.util.concurrent.TimeUnit
 import kotlin.math.min
 import kotlin.math.pow
 import kotlinx.coroutines.*
+import okhttp3.ConnectionPool
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -59,11 +60,11 @@ import org.slf4j.LoggerFactory
  */
 class SkillSdk
 private constructor(
-        private val apiKey: String,
-        private val baseUrl: String,
-        private val environment: String,
-        private val retryConfig: RetryConfig,
-        httpClient: OkHttpClient?
+    private val apiKey: String,
+    private val baseUrl: String,
+    private val environment: String,
+    private val retryConfig: RetryConfig,
+    httpClient: OkHttpClient?
 ) : AutoCloseable {
 
     private val logger = LoggerFactory.getLogger(SkillSdk::class.java)
@@ -73,15 +74,16 @@ private constructor(
 
     init {
         httpClientInternal =
-                (httpClient
-                                ?: OkHttpClient.Builder()
-                                        .connectTimeout(30, TimeUnit.SECONDS)
-                                        .readTimeout(30, TimeUnit.SECONDS)
-                                        .writeTimeout(30, TimeUnit.SECONDS)
-                                        .build())
-                        .newBuilder()
-                        .addInterceptor(ApiKeyInterceptor(apiKey))
-                        .build()
+            (httpClient
+                ?: OkHttpClient.Builder()
+                    .connectTimeout(30, TimeUnit.SECONDS)
+                    .readTimeout(30, TimeUnit.SECONDS)
+                    .writeTimeout(30, TimeUnit.SECONDS)
+                    .connectionPool(ConnectionPool(5, 50, TimeUnit.SECONDS))
+                    .build())
+                .newBuilder()
+                .addInterceptor(ApiKeyInterceptor(apiKey))
+                .build()
 
         skillApi = SkillApi(basePath = baseUrl, client = httpClientInternal)
     }
@@ -99,14 +101,14 @@ private constructor(
      * @throws ServerException if server error occurs after all retries (5xx status codes)
      */
     suspend fun postMatchResult(
-            modelId: String,
-            matchResultRequest: MatchResultRequest
+        modelId: String,
+        matchResultRequest: MatchResultRequest
     ): MatchResultResponse {
         return executeWithRetry {
             skillApi.postMatchResult(
-                    modelId = modelId,
-                    environment = environment,
-                    matchResultRequest = matchResultRequest
+                modelId = modelId,
+                environment = environment,
+                matchResultRequest = matchResultRequest
             )
         }
     }
@@ -124,9 +126,9 @@ private constructor(
     suspend fun postPreMatch(modelId: String, preMatchRequest: PreMatchRequest): PreMatchResponse {
         return executeWithRetry {
             skillApi.postPreMatch(
-                    modelId = modelId,
-                    environment = environment,
-                    preMatchRequest = preMatchRequest
+                modelId = modelId,
+                environment = environment,
+                preMatchRequest = preMatchRequest
             )
         }
     }
@@ -141,8 +143,8 @@ private constructor(
      */
     @JvmName("postMatchResultBlocking")
     fun postMatchResultBlocking(
-            modelId: String,
-            matchResultRequest: MatchResultRequest
+        modelId: String,
+        matchResultRequest: MatchResultRequest
     ): MatchResultResponse {
         return runBlocking { postMatchResult(modelId, matchResultRequest) }
     }
@@ -167,8 +169,8 @@ private constructor(
      */
     @JvmName("postMatchResultAsync")
     fun postMatchResultAsync(
-            modelId: String,
-            matchResultRequest: MatchResultRequest
+        modelId: String,
+        matchResultRequest: MatchResultRequest
     ): CompletableFuture<MatchResultResponse> {
         val future = CompletableFuture<MatchResultResponse>()
         coroutineScope.launch {
@@ -189,8 +191,8 @@ private constructor(
      */
     @JvmName("postPreMatchAsync")
     fun postPreMatchAsync(
-            modelId: String,
-            preMatchRequest: PreMatchRequest
+        modelId: String,
+        preMatchRequest: PreMatchRequest
     ): CompletableFuture<PreMatchResponse> {
         val future = CompletableFuture<PreMatchResponse>()
         coroutineScope.launch {
@@ -211,7 +213,7 @@ private constructor(
         for (attempt in 0 until retryConfig.maxRetries) {
             try {
                 logger.debug(
-                        "Attempting API call (attempt ${attempt + 1}/${retryConfig.maxRetries}) "
+                    "Attempting API call (attempt ${attempt + 1}/${retryConfig.maxRetries}) "
                 )
                 return block()
             } catch (e: ClientException) {
@@ -221,16 +223,16 @@ private constructor(
             } catch (e: Exception) {
                 lastException = e
                 logger.warn(
-                        "API call failed (attempt ${attempt + 1}/${retryConfig.maxRetries}): ${e.message}"
+                    "API call failed (attempt ${attempt + 1}/${retryConfig.maxRetries}): ${e.message}"
                 )
 
                 // Check if we should retry
                 val shouldRetry =
-                        when (e) {
-                            is IOException -> true
-                            is ServerException -> e.statusCode >= 500
-                            else -> false
-                        }
+                    when (e) {
+                        is IOException -> true
+                        is ServerException -> e.statusCode >= 500
+                        else -> false
+                    }
 
                 if (!shouldRetry || attempt == retryConfig.maxRetries - 1) {
                     throw e
@@ -266,9 +268,9 @@ private constructor(
     data class RetryConfig
     @JvmOverloads
     constructor(
-            val maxRetries: Int = 3,
-            val initialDelayMs: Long = 500,
-            val maxDelayMs: Long = 10000,
+        val maxRetries: Int = 3,
+        val initialDelayMs: Long = 500,
+        val maxDelayMs: Long = 10000,
     ) {
         init {
             require(maxRetries > 0) { "maxRetries must be positive" }
@@ -315,11 +317,11 @@ private constructor(
             require(environment.isNotBlank()) { "Environment cannot be blank" }
 
             return SkillSdk(
-                    apiKey = apiKey,
-                    baseUrl = baseUrl,
-                    environment = environment,
-                    retryConfig = retryConfig,
-                    httpClient = httpClient
+                apiKey = apiKey,
+                baseUrl = baseUrl,
+                environment = environment,
+                retryConfig = retryConfig,
+                httpClient = httpClient
             )
         }
     }
@@ -328,7 +330,7 @@ private constructor(
     private class ApiKeyInterceptor(private val apiKey: String) : Interceptor {
         override fun intercept(chain: Interceptor.Chain): Response {
             val request: Request =
-                    chain.request().newBuilder().addHeader("x-ivk-apikey", apiKey).build()
+                chain.request().newBuilder().addHeader("x-ivk-apikey", apiKey).build()
             return chain.proceed(request)
         }
     }
@@ -339,6 +341,7 @@ private constructor(
          *
          * @return A new Builder for constructing SkillSdk instances
          */
-        @JvmStatic fun builder(): Builder = Builder()
+        @JvmStatic
+        fun builder(): Builder = Builder()
     }
 }
