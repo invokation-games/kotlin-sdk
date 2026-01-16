@@ -15,8 +15,8 @@
 
 package ivk.skill.api.models
 
-import io.kotlintest.shouldBe
-import io.kotlintest.specs.ShouldSpec
+import io.kotest.matchers.shouldBe
+import io.kotest.core.spec.style.ShouldSpec
 
 import ivk.skill.api.models.PreMatchPlayerResultExtended
 import ivk.skill.api.models.BetaDistribution

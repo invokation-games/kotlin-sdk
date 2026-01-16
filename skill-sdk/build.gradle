@@ -3,7 +3,7 @@ archivesBaseName = "ivk-skill-sdk"
 version =  file("$projectDir/version.txt").text.trim()
 
 buildscript {
-    ext.kotlin_version = '1.9.23'
+    ext.kotlin_version = '2.2.0'
     ext.spotless_version = "6.25.0"
     ext.dokka_version = "2.0.0"
 
@@ -61,7 +61,10 @@ dependencies {
     implementation "com.squareup.moshi:moshi-adapters:1.15.1"
     implementation "com.squareup.okhttp3:okhttp:4.12.0"
     implementation("org.slf4j:slf4j-api:2.0.17")
-    testImplementation "io.kotlintest:kotlintest-runner-junit5:3.4.2"
+    testImplementation "io.kotest:kotest-runner-junit5-jvm:6.0.7"
+    testImplementation "io.kotest:kotest-assertions-core-jvm:6.0.7"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.10.1"
+    testImplementation "com.squareup.okhttp3:mockwebserver:4.12.0"
 }
 
 tasks.register('sourcesJar', Jar) {

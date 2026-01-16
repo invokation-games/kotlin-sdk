@@ -44,7 +44,7 @@ import ivk.skill.api.infrastructure.ResponseType
 import ivk.skill.api.infrastructure.Success
 import ivk.skill.api.infrastructure.toMultiValue
 
-open class SkillApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = ApiClient.defaultClient) : ApiClient(basePath, client) {
+class SkillApi(basePath: kotlin.String = defaultBasePath, client: Call.Factory = ApiClient.defaultClient) : ApiClient(basePath, client) {
     companion object {
         @JvmStatic
         val defaultBasePath: String by lazy {
