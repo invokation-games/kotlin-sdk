@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.3.0](https://github.com/invokation-games/kotlin-sdk/compare/v1.2.0...v1.3.0) (2026-01-16)
+
+
+### Features
+
+* match proxy http idle connection timeouts ([9acf8af](https://github.com/invokation-games/kotlin-sdk/commit/9acf8afa0d6effb6b4bb925f16864bacf10ddbdc))
+* sync openapi spec ([#19](https://github.com/invokation-games/kotlin-sdk/issues/19)) ([6b98cfb](https://github.com/invokation-games/kotlin-sdk/commit/6b98cfb345797d39c25db403bf0bf73c0d01c22b))
+* upgrade to kotlin 2.2, kotest 6 and add tests for SkillSdk ([546833e](https://github.com/invokation-games/kotlin-sdk/commit/546833e6d65bce002bab4248b5b7d4495c269067))
+
 ## [1.2.0](https://github.com/invokation-games/kotlin-sdk/compare/v1.1.0...v1.2.0) (2025-10-02)
 
 
