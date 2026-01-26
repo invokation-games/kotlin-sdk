@@ -4,7 +4,7 @@ version =  file("$projectDir/version.txt").text.trim()
 
 buildscript {
     ext.kotlin_version = '2.2.0'
-    ext.spotless_version = "6.25.0"
+    ext.spotless_version = "8.1.0"
     ext.dokka_version = "2.0.0"
 
     repositories {
